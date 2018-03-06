@@ -1,0 +1,30 @@
+#!/bin/rc
+# gfetch.rc
+# arwn 2018
+# 9front license I guess
+
+# TODO:
+# 	os type, labs/ants/front
+#	architecture
+#	fs type
+#	cpu specs
+#	fs usage/storage
+# 	kernel
+
+name=`{cat /dev/sysname}
+os=9front
+shell=/bin/rc
+uptime=`{uptime| sed 's/.*up//; s/..........$//'}
+ram=`{cat /dev/swap | grep memory | sed 's/.......$//' | awk '{gb=$1/10000000; print gb}' | sed 's/\..*$//'}
+totalram=`{memory | grep 'total user' | sed 's/.*user//; s/^.....//'}
+
+cat <<EOF
+
+    (\(\
+   j". ..   $user@$name
+   (  . .)  os: $os
+   |   ° ¡  shell: $shell
+   ¿     ;  uptime: $uptime
+   c?".UJ   ram: $ram/$totalram
+
+EOF
