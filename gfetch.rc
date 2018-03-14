@@ -7,7 +7,6 @@
 # 	os type, labs/ants/front
 #	architecture
 #	fs type
-#	cpu specs
 #	fs usage/storage
 # 	kernel
 
@@ -17,14 +16,17 @@ shell=/bin/rc
 uptime=`{uptime| sed 's/.*up//; s/..........$//'}
 ram=`{cat /dev/swap | grep memory | sed 's/.......$//' | awk '{gb=$1/10000000; print gb}' | sed 's/\..*$//'}
 totalram=`{memory | grep 'total user' | sed 's/.*user//; s/^.....//'}
+cpu=`{aux/cpuid | grep procname | sed 's/.*procname//'}
 
 cat <<EOF
 
-    (\(\
-   j". ..   $user@$name
+    (\(\    $user@$name
+   j". ..   -----------
    (  . .)  os: $os
    |   ° ¡  shell: $shell
    ¿     ;  uptime: $uptime
    c?".UJ   ram: $ram/$totalram
+            cpu: $cpu
+           
 
 EOF
