@@ -2,10 +2,10 @@
 # Warning, parts of this script have been STOLEN!
 
 # TODO:
-# 	os type, labs/ants/front
-#		fs type
-#		fs usage/storage
-# 	kernel
+#   os type, labs/ants/front
+#   fs type
+#   fs usage/storage
+#   kernel
 
 name=`{cat /dev/sysname}
 os=9front
