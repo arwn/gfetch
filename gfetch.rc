@@ -1,32 +1,30 @@
 #!/bin/rc
-# gfetch.rc
-# arwn 2018
-# 9front license I guess
+# Warning, parts of this script have been STOLEN!
 
 # TODO:
 # 	os type, labs/ants/front
-#	architecture
-#	fs type
-#	fs usage/storage
+#		fs type
+#		fs usage/storage
 # 	kernel
 
 name=`{cat /dev/sysname}
 os=9front
 shell=/bin/rc
 uptime=`{uptime| sed 's/.*up//; s/..........$//'}
-ram=`{cat /dev/swap | grep memory | sed 's/.......$//' | awk '{gb=$1/10000000; print gb}' | sed 's/\..*$//'}
-totalram=`{memory | grep 'total user' | sed 's/.*user//; s/^.....//'}
+scr=`{dd -count 1 < /dev/screen|[2];}
+scr=($scr(4) x $scr(5))
+ram=(`{tr / ' '</dev/swap})
+free=`{echo $ram(1)'/1024^2'|bc}
+used=`{echo '('$ram(3)'*('$ram(7)^+$ram(5)^'))/1024^2'|bc}
 cpu=`{aux/cpuid | grep procname | sed 's/.*procname//'}
 
 cat <<EOF
-
-    (\(\    $user@$name
-   j". ..   -----------
-   (  . .)  os: $os
-   |   ° ¡  shell: $shell
-   ¿     ;  uptime: $uptime
-   c?".UJ   ram: $ram/$totalram
-            cpu: $cpu
-           
-
+             $user@$name
+    (\(\     -----------
+   j". ..    os: Plan 9 from $os
+   (  . .)   shell: $shell
+   |   ° ¡   uptime: $uptime
+   ¿     ;   ram: $used/$free MiB
+   c?".UJ    cpu: $cputype $cpu 
+             resolution: $scr
 EOF
