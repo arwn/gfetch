@@ -7,7 +7,7 @@
 #   fs usage/storage
 #   kernel
 
-name=`{cat /dev/sysname}
+
 os=9front
 shell=/bin/rc
 uptime=`{uptime| sed 's/.*up//; s/..........$//'}
@@ -19,7 +19,7 @@ used=`{echo '('$ram(3)'*('$ram(7)^+$ram(5)^'))/1024^2'|bc}
 cpu=`{aux/cpuid | grep procname | sed 's/.*procname//'}
 
 cat <<EOF
-             $user@$name
+             $user@$sysname
     (\(\     -----------
    j". ..    os: Plan 9 from $os
    (  . .)   shell: $shell
