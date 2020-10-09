@@ -6,7 +6,6 @@
 # kernel
 
 fn storage {
-	bind -b '#S' /dev
 	disks = `{ls -d /dev/sd* | uniq}
 	anydisk = 'false'
 	for(i in $disks){
@@ -51,6 +50,10 @@ os=`{
 	if not
 		echo Bell Labs
 }
+
+# fs and storage require #S bound on /dev 
+bind -b '#S' /dev
+
 arch=`{echo $cputype}
 shell=/bin/rc
 uptime=`{uptime| sed 's/.*up//; s/..........$//'}
