@@ -39,7 +39,7 @@ fn fs {
 
 fn cpuid {
 	if(test -f /bin/aux/cpuid)
-		aux/cpuid | grep procname | sed 's/.*procname//'
+		aux/cpuid >[2]/dev/null | grep procname | sed 's/.*procname//'
 }
 
 os=`{
