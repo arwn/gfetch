@@ -57,7 +57,7 @@ bind -b '#S' /dev
 arch=`{echo $cputype}
 shell=/bin/rc
 uptime=`{uptime| sed 's/.*up//; s/..........$//'}
-scr=`{dd -count 1 < /dev/screen|[2];}
+if(test -f /dev/screen) scr=`{dd -count 1 < /dev/screen|[2];}
 scr=($scr(4) x $scr(5))
 ram=(`{tr / ' '</dev/swap})
 free=`{echo $ram(1)'/1024^2'|bc}
